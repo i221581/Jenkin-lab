@@ -19,14 +19,6 @@ pipeline {
             }
         }
         
-        stage('Maven Build') {
-            steps {
-                echo 'Testing Maven installation..'
-                sh 'mvn --version'  // ← Test Maven is available
-                sh 'mvn clean compile -DskipTests'  // ← Basic Maven command
-            }
-        }
-        
         stage('Test') {
             when {
                 expression { params.executeTests == true }
