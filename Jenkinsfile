@@ -1,6 +1,10 @@
 pipeline {
     agent any
     
+    tools {
+        maven 'Maven'  
+    }
+    
     environment {
         VERSION = '1.0.0'
     }
@@ -16,6 +20,14 @@ pipeline {
                 echo "Version: ${VERSION}"
                 sh 'echo "Build stage completed on Ubuntu"'
                 sh 'uname -a'
+            }
+        }
+        
+        stage('Maven Build') {
+            steps {
+                echo 'Testing Maven installation..'
+                sh 'mvn --version'  // ← Test Maven is available
+                sh 'mvn clean compile -DskipTests'  // ← Basic Maven command
             }
         }
         
